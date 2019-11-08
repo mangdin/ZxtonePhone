@@ -4,6 +4,9 @@ zxtonephone学生机PHP SDK
         $ys7 = new ZxtoneClient('用户名','密码','key');
         echo "AccessToken=".$ys7->getCookieStore() . "\n";
 
+        echo "获取设备列表\n";
+        print_r($ys7->getDeviceList(1,10));
+
         echo "获取设备信息\n";
         print_r($ys7->getDeviceDetial('8888'));
 
