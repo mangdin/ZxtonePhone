@@ -104,6 +104,31 @@ class ZxtoneClient
     }
 
     /**
+     * 获取设备列表
+     * @param $PageIndex 当前分页的索引 从1开始 不能大于1000
+     * @param $PageSize 分页大小 最小5 最大100
+     * @param bool $IncludLow 是否包含下级的下级的设备
+     * @param null $SerialNumber 设备序列号
+     * @param null $DeviceName 设备名称
+     * @param null $TelPhoneNum 设备的手机号码
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \think\Exception
+     */
+    public function getDeviceList( $PageIndex, $PageSize, $IncludLow = true, $SerialNumber = null, $DeviceName = null, $TelPhoneNum = null)
+    {
+        $params = [
+            'IncludLow'=>$IncludLow,
+            'PageIndex'=>$PageIndex,
+            'PageSize'=>$PageSize,
+            'Serialnumber' => $SerialNumber,
+            'DeviceName'=>$DeviceName,
+            'TelPhoneNum'=>$TelPhoneNum
+        ];
+        return $this->post(self::API_ENDPOINT . '/GetDeviceList', $params);
+    }
+
+    /**
      *  获取设备实时信息详情
      * @param $SerialNumber 设备号
      * @return mixed
@@ -133,6 +158,13 @@ class ZxtoneClient
         return $this->post(self::API_ENDPOINT . '/UpdateDeviceName', $params);
     }
 
+    /**
+     * 获取设备亲情号码集合
+     * @param $SerialNumber 设备号
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \think\Exception
+     */
     public function getPhoneConfig($SerialNumber)
     {
         $params = [
