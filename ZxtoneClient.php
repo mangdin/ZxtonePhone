@@ -159,6 +159,56 @@ class ZxtoneClient
     }
 
     /**
+     *  修改设备信息
+     * @param $SerialNumber 设备号
+     * @param $DeviceName 设备新名称
+     * @param $DeviceTel 设备手机号
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \think\Exception
+     */
+    public function updateDeviceInfo($SerialNumber,$DeviceName,$DeviceTel){
+        $params = [
+            'Serialnumber' => $SerialNumber,
+            'DeviceName' => $DeviceName,
+            'Tel' => $DeviceTel,
+        ];
+        return $this->post(self::API_ENDPOINT . '/UpdateDeviceInfo', $params);
+    }
+
+    /**
+     *  查看上课时间段
+     * @param $SerialNumber 设备号
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \think\Exception
+     */
+    public function getClassTime($SerialNumber){
+        $params = [
+            '_id' => $SerialNumber,
+        ];
+        return $this->post(self::API_ENDPOINT . '/SHX_GetClassTime', $params);
+    }
+
+    /**
+     * 设置上课时间段
+     * @param $SerialNumber 设备号
+     * @param $CommandText 时间格式 第一个字符标识开关，2 标识开，1标识关闭紧跟着开始时间和结束时间 YYMMYYMM其中YY和MM用24小时制数字表示后面多个连续YYMMYYMM比如 0800开始 0900结束, 九点开始，十点结束 表示为: 10800090009001000
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \think\Exception
+     */
+    public function setClassTime($SerialNumber, $CommandText){
+        $params = [
+            'item' => [
+                'Serialnumber' => $SerialNumber,
+                'CommandText' => $CommandText,
+            ]
+        ];
+        return $this->post(self::API_ENDPOINT . '/SHX_SetClassTime', $params);
+    }
+
+    /**
      * 获取设备亲情号码集合
      * @param $SerialNumber 设备号
      * @return mixed
