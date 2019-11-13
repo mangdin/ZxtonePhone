@@ -13,6 +13,15 @@ zxtonephone学生机PHP SDK
         echo "修改设备名称\n";
         print_r($ys7->updateDeviceName('8888','芒丁测试'));
 
+        echo "修改设备信息\n";
+        print_r($ys7->updateDeviceInfo('A1000006A8039A','芒丁测试','19159001901'));
+
+        echo "获取上课时间段\n";
+        print_r($ys7->getClassTime('A1000006A8039A'));
+
+        echo "设置上课时间段\n";
+        print_r($ys7->setClassTime('A1000006A8039A','110001600'));
+
         echo "获取亲情号码\n";
         print_r($ys7->getPhoneConfig('8888'));
 
