@@ -243,6 +243,30 @@ class ZxtoneClient
 
 
     /**
+     * @param $SerialNumber 设备号
+     * @param string $KeySOSSMSNo 亲情号码1 SOS号码
+     * @param string $Key1SMSNo 亲情号码2
+     * @param string $Key2SMSNo 亲情号码3
+     * @param string $Key3SMSNo 亲情号码4
+     * @param string $Listen 监听号码
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \think\Exception
+     */
+    public function setAllPhoneNumber($SerialNumber,$KeySOSSMSNo = '',$Key1SMSNo = '',$Key2SMSNo = '',$Key3SMSNo = '',$Listen = ''){
+        $params = [
+            'Serialnumber' => $SerialNumber,
+            'KeySOSSMSNo' => $KeySOSSMSNo,
+            'Key1SMSNo' => $Key1SMSNo,
+            'Key2SMSNo' => $Key2SMSNo,
+            'Key3SMSNo' => $Key3SMSNo,
+            'Listen' => $Listen,
+        ];
+        return $this->post(self::API_ENDPOINT . '/SHX007BatchSetSOSNum', $params);
+    }
+
+
+    /**
      * 获取Cookie保存在缓存中的键值
      *
      * @param string $LoginName
